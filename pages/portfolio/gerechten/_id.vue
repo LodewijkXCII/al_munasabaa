@@ -50,19 +50,18 @@
 export default {
   data() {
     return {
-      pakket: {}
+      gerechten: []
     }
   },
   async mounted() {
-    // TODO QUERY
-    //     const params = this.$route.params.id
-    //     const query = groq`
-    //   {
-    //     "gerechten": *[_type == 'gerechten' && course == "${params}"]{...,  'headerimg': headerimg.asset->url}
-    //   }
-    // `
-    //     const response = await sanityClient.fetch(query)
-    //     this.pakket = response.gerechten
+    const URL = 'https://al-munasabaa.herokuapp.com/gerechtens'
+    try {
+      const data = await this.$axios.$get(`${URL}`)
+      console.log(data)
+      this.gerecht = data
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 </script>

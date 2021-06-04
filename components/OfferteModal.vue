@@ -134,7 +134,9 @@ export default {
     }
   },
   async created() {
-    const data = await this.$axios.$get('http://localhost:1337/pakettens')
+    const data = await this.$axios.$get(
+      'https://al-munasabaa.herokuapp.com/pakettens'
+    )
     this.paketten = data
   }
 }

@@ -2,7 +2,8 @@
   <section>
     <div class="">
       <img
-        src="@/assets/img/flower_gold_table.jpg"
+        v-if="pakket.Afbeelding"
+        :src="pakket.Afbeelding.url"
         alt="Romantic Blue overview"
         class="top-img-half"
       />
@@ -10,8 +11,8 @@
         <h1 class="title lg:text-7xl md:text-6xl text-4xl"></h1>
       </div>
     </div>
-    <div class="container mx-auto grid grid-cols-6 gap-8 my-10">
-      <div class="lg:col-span-4 col-span-6 justify-center px-4">
+    <div class="container mx-auto grid grid-cols-6  my-10">
+      <div class="col-span-4 col-start-2 justify-center px-4">
         <h1
           class="gold py-4 text-center font-bold uppercase lg:text-4xl text-2xl"
         >
@@ -43,13 +44,13 @@
           </p>
         </div>
       </div>
-      <div class="col-span-2">
+      <!-- <div class="col-span-2" v-if="pakket.Afbeelding">
         <img
-          src="@/assets/img/flower_gold_table.jpg"
+          :src="pakket.Afbeelding.url"
           alt="Romantic Blue overview"
           class="lg:block hidden"
         />
-      </div>
+      </div> -->
     </div>
     <div class="container mx-auto my-10">
       <h2
@@ -121,7 +122,7 @@ export default {
   async mounted() {
     const params = this.$route.params.id
 
-    const URL = 'http://localhost:1337/pakettens'
+    const URL = 'https://al-munasabaa.herokuapp.com/pakettens'
     try {
       const data = await this.$axios.$get(`${URL}?slug=${params}`)
       console.log(data[0])

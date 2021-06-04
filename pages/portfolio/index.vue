@@ -30,53 +30,84 @@
           overweldigende smaken en de prachtige opmaak van onze gerechten.
         </p>
 
-        <div class="grid grid-cols-3 gap-4">
-          <div class="bg-gray-700">
-            <img
-              src="https://picsum.photos/400/600/?random"
-              alt=""
-              class="w-full h-48 sm:h-56 object-cover"
-            />
-
+        <div class="grid grid-cols-4 gap-4 my-8">
+          <div class="">
             <div
               class="text-2xl font-bold gold uppercase text-center mx-auto my-8"
               @click="show == 1"
             >
-              <nuxt-link to="/portfolio/gerechten/voor-hoofdgerecht">
-                Voor- Hoofdgerechten
-              </nuxt-link>
+              <h3>Voor- Hoofdgerechten</h3>
             </div>
           </div>
-          <div class="bg-gray-700">
+          <div
+            class="bg-gray-700"
+            v-for="gerecht in gerechten.Voor_hoofd"
+            :key="gerecht.id"
+          >
             <img
-              src="https://picsum.photos/400/600/?random"
-              alt=""
+              v-if="gerecht.Afbeelding"
+              :src="gerecht.Afbeelding.url"
+              :alt="gerecht.caption"
               class="w-full h-48 sm:h-56 object-cover"
             />
-
             <div
               class="text-2xl font-bold gold uppercase text-center mx-auto my-8"
-              @click="show == 1"
             >
-              <nuxt-link to="/portfolio/gerechten/desserts">
-                Desserts
-              </nuxt-link>
+              {{ gerecht.Titel }}
             </div>
           </div>
-          <div class="bg-gray-700">
-            <img
-              src="https://picsum.photos/400/600/?random"
-              alt=""
-              class="w-full h-48 sm:h-56 object-cover"
-            />
-
+        </div>
+        <div class="grid grid-cols-4 gap-4 my-8">
+          <div class="">
             <div
               class="text-2xl font-bold gold uppercase text-center mx-auto my-8"
               @click="show == 1"
             >
-              <nuxt-link to="/portfolio/gerechten/overige">
-                Overige
-              </nuxt-link>
+              <h3>Dessert</h3>
+            </div>
+          </div>
+          <div
+            class="bg-gray-700"
+            v-for="gerecht in gerechten.Dessert"
+            :key="gerecht.id"
+          >
+            <img
+              v-if="gerecht.Afbeelding"
+              :src="gerecht.Afbeelding.url"
+              :alt="gerecht.caption"
+              class="w-full h-48 sm:h-56 object-cover"
+            />
+            <div
+              class="text-2xl font-bold gold uppercase text-center mx-auto my-8"
+            >
+              {{ gerecht.Titel }}
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-4 gap-4 my-8">
+          <div class="">
+            <div
+              class="text-2xl font-bold gold uppercase text-center mx-auto my-8"
+              @click="show == 1"
+            >
+              <h3>Overig</h3>
+            </div>
+          </div>
+          <div
+            class="bg-gray-700"
+            v-for="gerecht in gerechten.Overig"
+            :key="gerecht.id"
+          >
+            <img
+              v-if="gerecht.Afbeelding"
+              :src="gerecht.Afbeelding.url"
+              :alt="gerecht.caption"
+              class="w-full h-48 sm:h-56 object-cover"
+            />
+            <div
+              class="text-2xl font-bold gold uppercase text-center mx-auto my-8"
+            >
+              {{ gerecht.Titel }}
             </div>
           </div>
         </div>
@@ -93,25 +124,28 @@
         hierin aanvullingen of maatwerk leveren. Onze stijl laten wij met alle
         liefde aansluiten op uw wensen.
       </p>
-      <div class="grid grid-cols-4 gap-4">
-        <div
-          class="bg-gray-700"
-          v-for="decoratie in decoraties"
-          :key="decoratie._id"
-        >
-          <img
-            src="https://picsum.photos/400/600/?random"
-            alt=""
-            class="w-full h-48 sm:h-56 object-cover"
-          />
-
+      <div
+        class="grid grid-cols-12 gap-4"
+        v-for="decoratie in decoraties"
+        :key="decoratie.id"
+      >
+        <div class="bg-gray-700 col-span-3">
           <div
             class="text-2xl font-bold gold uppercase text-center mx-auto my-8"
           >
-            <nuxt-link :to="`/portfolio/decoraties/${decoratie.slug.current}`">
-              {{ decoratie.titel }}
-            </nuxt-link>
+            {{ decoratie.Titel }}
           </div>
+        </div>
+        <div
+          v-for="galleryimage in decoratie.Gallerij.slice(0, 11)"
+          :key="galleryimage.id"
+          class="col-span-3"
+        >
+          <img
+            :src="galleryimage.formats.small.url"
+            :alt="galleryimage.caption"
+            class="w-full h-48 sm:h-56 object-cover"
+          />
         </div>
       </div>
     </div>
@@ -119,6 +153,8 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 export default {
   data() {
     return {
@@ -126,19 +162,20 @@ export default {
       decoraties: [],
       gerechten: []
     }
-  }
+  },
   // TODO QUERY
-  //   async created() {
-  //     const query = groq`
-  //   {
-  //     "decoraties": *[_type == 'decoratie'],
-  //     "gerechten": *[_type == 'gerechten']
-  //   }
-  // `
-  //     const response = await sanityClient.fetch(query)
-  //     this.gerechten = response.gerechten
-  //     this.decoraties = response.decoraties
-  //   }
+  async mounted() {
+    const URL_gerechten = 'https://al-munasabaa.herokuapp.com/gerechtens'
+    const URL_decoraties = 'https://al-munasabaa.herokuapp.com/decoraties'
+    try {
+      const gerechten = await this.$axios.$get(`${URL_gerechten}`)
+      this.gerechten = _.groupBy(gerechten, 'Gang')
+
+      this.decoraties = await this.$axios.$get(`${URL_decoraties}`)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 }
 </script>
 

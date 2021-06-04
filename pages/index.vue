@@ -146,7 +146,7 @@ export default {
     }
   },
   async created() {
-    const URL = 'http://localhost:1337/pakettens'
+    const URL = 'https://al-munasabaa.herokuapp.com/pakettens'
     const data = await this.$axios.$get(URL)
 
     this.paketten = data
