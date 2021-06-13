@@ -170,6 +170,14 @@ export default {
   transition: all 0.3s ease;
 }
 
+@media screen and (max-width: 600px) {
+  .modal-container {
+    width: 100%;
+    background: rgba($color: #1d283a, $alpha: 0.4);
+    height: 100vh;
+  }
+}
+
 .modal-header {
   display: flex;
   justify-content: flex-end;
