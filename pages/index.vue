@@ -10,7 +10,7 @@
         <h1 class="title lg:text-7xl md:text-6xl gold text-4xl my-4">
           Almunasabaa
         </h1>
-        <h2 class="subtitle lg:text-2xl md:text-xl alblue text-l">
+        <h2 class="subtitle lg:text-2xl md:text-xl text-l">
           Luxary Catering
         </h2>
         <div class="keywords-front lg:text-4xl md:text-3xl text-2xl my-2">
@@ -20,10 +20,12 @@
     </div>
 
     <section class="container mx-auto callout" id="wiezijnwij">
-      <h2 class="text-4xl font-bold text-center mb-6 mt-6">Wie zijn wij?</h2>
+      <h2 class="text-4xl font-bold text-center mb-6 mt-10">Wie zijn wij?</h2>
       <div class="flex flex-wrap px-6">
         <div class="w-full lg:w-1/3   md:px-4 lg:px-6 py-5">
-          <div class="bg-gray-700 hover:shadow-xl text-center py-6">
+          <div
+            class="bg-gray-700 hover:shadow-xl text-center pt-10 pb-6 min-h-full"
+          >
             <font-awesome-icon
               :icon="['fas', 'check-double']"
               class="fa-2x gold"
@@ -38,7 +40,9 @@
           </div>
         </div>
         <div class="w-full lg:w-1/3   md:px-4 lg:px-6 py-5">
-          <div class="bg-gray-700 hover:shadow-xl text-center py-6">
+          <div
+            class="bg-gray-700 hover:shadow-xl text-center pt-10 pb-6 min-h-full"
+          >
             <font-awesome-icon :icon="['fas', 'utensils']" class="fa-2x gold" />
             <h4 class="gold pt-4 pb-1 pm-4 font-bold">
               Achtergrond in horeca
@@ -53,7 +57,9 @@
           </div>
         </div>
         <div class="w-full lg:w-1/3   md:px-4 lg:px-6 py-5">
-          <div class="bg-gray-700 hover:shadow-xl text-center py-6">
+          <div
+            class="bg-gray-700 hover:shadow-xl text-center pt-10 pb-6 min-h-full"
+          >
             <font-awesome-icon :icon="['fas', 'users']" class="fa-2x gold" />
             <h4 class="gold pt-4 pb-1 pm-4 font-bold">Familiebedrijf</h4>
             <p class="py-4 mx-8 text-left">
@@ -65,8 +71,8 @@
           </div>
         </div>
       </div>
-      <div class="py-20 px-8 grid grid-cols-6 gap-8">
-        <div class="col-span-4 my-auto">
+      <div class="py-20 px-6 lg:px-8 grid grid-cols-6 gap-8">
+        <div class="col-span-6 lg:col-span-4 my-auto">
           <h2 class="gold text-4xl font-bold text-center mb-6">Ons verhaal</h2>
           <p class="my-4">
             Welkom bij Al-Munasaba. Om u een beter beeld te geven van wie wij
@@ -83,7 +89,9 @@
             trouwbranche.
           </p>
         </div>
-        <div class="col-span-2 my-auto">
+        <div
+          class="row-start-1 lg:row-start-auto col-span-6 lg:col-span-2 my-auto"
+        >
           <img
             alt="Placeholder"
             class="block h-auto w-full"
@@ -94,12 +102,12 @@
     </section>
     <!-- END SECTION WIE ZIJN WIJ -->
 
-    <section class="my-8 bg-img" id="pakketten">
-      <div class="img-full section-C container mx-auto py-16">
+    <section class="mt-8 bg-img" id="pakketten">
+      <div class="img-full section-C container mx-auto px-6 lg:px-8 py-20">
         <h2 class="gold text-4xl font-bold text-center mb-6">
           De verschillende Pakketten
         </h2>
-        <div class="grid md:grid-cols-5 p-8 gap-4 m-5">
+        <div class="grid grid-cols-4 gap-4 gap-y-32 my-5">
           <Paketten
             v-for="pakket in paketten"
             :key="pakket.id"
@@ -163,6 +171,7 @@ export default {
   top: 0;
   z-index: -1;
   opacity: 0.25;
+  object-fit: cover;
 }
 
 .top-img-half {
@@ -171,6 +180,7 @@ export default {
   width: 100%;
   top: 0;
   z-index: -1;
+  object-fit: cover;
 }
 
 .full {

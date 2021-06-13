@@ -35,6 +35,19 @@ export default {
 <style lang="scss">
 @import '~/assets/scss/main.scss';
 
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Abril Fatface', cursive;
+  letter-spacing: 2px;
+}
+
+h1,
+h2 {
+  letter-spacing: 4px;
+}
+
 .gold {
   color: $gold-color;
   &-darker {

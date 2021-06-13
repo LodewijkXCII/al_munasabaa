@@ -8,7 +8,7 @@
 
         <div class="modal-body">
           <h1 class="gold lg:text-4xl md:text-4xl text-4xl px-5">
-            Offerte aanvragen
+            Vraag geheel vrijblijvend een offerte aan
           </h1>
           <form class="p-6 flex flex-col justify-center" @submit="submit">
             <div class="flex flex-col">

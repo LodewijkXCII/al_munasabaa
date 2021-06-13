@@ -1,5 +1,8 @@
 <template>
   <section>
+    <modal v-if="showModal" @close="showModal = false">
+      <h3 slot="header">Offerte aanvragen</h3>
+    </modal>
     <div class="">
       <img
         v-if="pakket.Afbeelding"
@@ -11,8 +14,8 @@
         <h1 class="title lg:text-7xl md:text-6xl text-4xl"></h1>
       </div>
     </div>
-    <div class="container mx-auto grid grid-cols-6  my-10">
-      <div class="col-span-4 col-start-2 justify-center px-4">
+    <div class="container mx-auto grid grid-cols-6 px-4 my-10">
+      <div class="col-span-6 lg:col-span-4 lg:col-start-2 justify-center ">
         <h1
           class="gold py-4 text-center font-bold uppercase lg:text-4xl text-2xl"
         >
@@ -34,14 +37,22 @@
             {{ pakket.Nagerecht }}
           </li>
         </ul>
-        <div class="mt-8">
-          <h3 class="text-2xl font-bold gold mb-1 uppercase">
-            Prijs per persoon
-          </h3>
-          <p class="text-lg text-weight-600">
-            &euro; {{ pakket.Prijs }}
-            <span class="text-xs">(exlusief BTW)</span>
-          </p>
+      </div>
+      <div class="mt-8 lg:col-span-2 lg:col-start-2 col-span-6">
+        <h3 class="text-2xl font-bold gold mb-1 uppercase">
+          Prijs per persoon
+        </h3>
+        <p class="text-lg text-weight-600">
+          &euro; {{ pakket.Prijs }}
+          <span class="text-xs">(exlusief BTW)</span>
+        </p>
+      </div>
+      <div class="mt-8 col-span-6 lg:col-span-2 lg:col-start-4">
+        <div
+          @click="showModal = true"
+          class=" bg-gold flex justify-center hover:bg-gold-darker text-white py-3 px-6 rounded-lg hover:bg-gold-darker transition ease-in-out duration-300"
+        >
+          Offerte aanvragen
         </div>
       </div>
       <!-- <div class="col-span-2" v-if="pakket.Afbeelding">
@@ -111,12 +122,17 @@
 
 <script>
 import _ from 'lodash'
+import Modal from '~/components/OfferteModal'
 
 export default {
+  components: {
+    Modal
+  },
   data() {
     return {
       pakket: {},
-      gerechten: []
+      gerechten: [],
+      showModal: false
     }
   },
   async mounted() {

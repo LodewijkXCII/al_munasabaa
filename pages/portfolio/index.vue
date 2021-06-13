@@ -7,7 +7,7 @@
         class="top-img-half"
       />
       <div class="img-full container half-full mx-auto">
-        <h1 class="title lg:text-7xl md:text-6xl text-4xl text-center">
+        <h1 class="title lg:text-7xl md:text-6xl text-4xl text-center gold">
           Portfolio
         </h1>
       </div>
@@ -30,7 +30,7 @@
           overweldigende smaken en de prachtige opmaak van onze gerechten.
         </p>
 
-        <div class="grid grid-cols-4 gap-4 my-8">
+        <div class="grid lg:grid-cols-4 gap-4 my-8">
           <div class="">
             <div
               class="text-2xl font-bold gold uppercase text-center mx-auto my-8"
@@ -57,7 +57,7 @@
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-4 gap-4 my-8">
+        <div class="grid lg:grid-cols-4 gap-4 my-8">
           <div class="">
             <div
               class="text-2xl font-bold gold uppercase text-center mx-auto my-8"
@@ -84,7 +84,7 @@
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-4 gap-4 my-8">
+        <div class="grid lg:grid-cols-4 gap-4 my-8">
           <div class="">
             <div
               class="text-2xl font-bold gold uppercase text-center mx-auto my-8"
@@ -93,6 +93,7 @@
               <h3>Overig</h3>
             </div>
           </div>
+
           <div
             class="bg-gray-700"
             v-for="gerecht in gerechten.Overig"
@@ -124,29 +125,12 @@
         hierin aanvullingen of maatwerk leveren. Onze stijl laten wij met alle
         liefde aansluiten op uw wensen.
       </p>
-      <div
-        class="grid grid-cols-12 gap-4"
-        v-for="decoratie in decoraties"
-        :key="decoratie.id"
-      >
-        <div class="bg-gray-700 col-span-3">
-          <div
-            class="text-2xl font-bold gold uppercase text-center mx-auto my-8"
-          >
-            {{ decoratie.Titel }}
-          </div>
+      <div v-for="decoratie in decoraties" :key="decoratie.id">
+        <div class="text-2xl font-bold gold uppercase text-center mx-auto my-8">
+          {{ decoratie.Titel }}
         </div>
-        <div
-          v-for="galleryimage in decoratie.Gallerij.slice(0, 11)"
-          :key="galleryimage.id"
-          class="col-span-3"
-        >
-          <img
-            :src="galleryimage.formats.small.url"
-            :alt="galleryimage.caption"
-            class="w-full h-48 sm:h-56 object-cover"
-          />
-        </div>
+
+        <Carousel :slides="decoratie.Gallerij" />
       </div>
     </div>
   </section>
@@ -154,6 +138,7 @@
 
 <script>
 import _ from 'lodash'
+import Carousel from '~/components/Carousel'
 
 export default {
   data() {
@@ -162,6 +147,9 @@ export default {
       decoraties: [],
       gerechten: []
     }
+  },
+  components: {
+    Carousel
   },
   // TODO QUERY
   async mounted() {

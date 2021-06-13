@@ -3,10 +3,12 @@ $secondary-color: #37404f;
 $gold-color: #bea950;
 $gold-opacity: #beaa5052;
 $blue-opacity: rgba(55, 64, 79, 0.7);
-$font-lora: 'Lora', serif;
+$font-lora: 'Abril Fatface', cursive;
 
 @import url('https://fonts.googleapis.com/css?family=Karla&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Lora&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Roboto:wght@100;400;700;900&display=swap');
 
 * {
   box-sizing: border-box;
@@ -19,7 +21,7 @@ html {
 
 body {
   background-color: #1d283a;
-  font-family: 'Karla', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: normal;
   color: #ffffff;
 }

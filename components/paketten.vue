@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-gray-700 relative min-h-full">
+  <div class="bg-gray-700 relative col-span-4 lg:col-span-1 min-h-full">
     <div class="px-6 py-6 mb-4 text-center">
-      <div class="text-2xl font-bold gold mb-4 uppercase">
+      <h3 class="text-2xl font-bold gold mb-4 uppercase">
         {{ titel }}
-      </div>
+      </h3>
       <p class="text-lg text-weight-600 my-4">
         &euro; {{ prijs.toFixed(2) }} <span class="text-xs">/per persoon</span>
         <span class="text-xs block">(excl BTW)</span>
@@ -50,7 +50,6 @@ export default {
     titel: String,
     decoraties: Array,
     dranken: String,
-
     nagerecht: String,
     voorHoofd: String,
     vooraf: String
